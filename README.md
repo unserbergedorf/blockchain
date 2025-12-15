@@ -1,32 +1,17 @@
-# Regional Token Wallet - Dokumentation
+# Blockchain Daten Repository
 
-Dieser Ordner enthält Dokumente und Daten zur Regional Token Wallet.
+Repository für Blockchain-bezogene Daten und Dokumentation des Projekts Unser Bergedorf.
 
-## Inhalt
+## Ordnerstruktur
 
-### Dokumente
-- `RegionalToken Wallet.pdf` - Technische Dokumentation der Wallet
-- `WalletFunktionen.png` - Übersicht der Wallet-Funktionen
+### regionaltoken_wallet/
+Enthält Dokumentation und Daten zur Regional Token Wallet:
+- Technische Dokumentation (PDF)
+- Funktionsübersicht (PNG)
+- Wallet-Daten und Statistiken (Excel)
 
-### Daten
-- `regionaltoken_wallet.xlsx` - Daten zur Wallet-Verteilung und Statistiken
-
-## Dateibeschreibung
-
-### PDF Dokument
-- **Titel**: RegionalToken Wallet
-- **Inhalt**: Technische Spezifikationen, Sicherheitsfeatures, Anwendungsfälle
-- **Version**: [Bitte ergänzen]
-
-### Excel Datei
-- **Tabellen**: 
-  - Wallet Statistiken
-  - Token-Verteilung
-  - Transaktionsdaten
-- **Letzte Aktualisierung**: [Datum einfügen]
-
-## Datenaktualisierung
-Die Daten werden [monatlich/vierteljährlich] aktualisiert.
+## Nutzung
+Die Daten können für Analyse, Dokumentation und Weiterentwicklung verwendet werden.
 
 ## Lizenz
-Siehe Haupt-LICENSE Datei im Root-Verzeichnis.
+[Lizenzinformation - bitte ergänzen]
