@@ -1,0 +1,5 @@
+name: 'RegioToken Wallet'
+type: module
+description: 'Blockchain Wallet für RegioToken'
+core_version_requirement: ^9 || ^10 || ^11
+package: 'Custom'

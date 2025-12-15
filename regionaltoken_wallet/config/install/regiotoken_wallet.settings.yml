@@ -1,0 +1,21 @@
+chains:
+  gnosis:
+    name: 'Gnosis Chain'
+    rpc_url: 'https://rpc.gnosischain.com'
+    explorer_url: 'https://gnosis.blockscout.com'
+    chain_id: 100
+    symbol: 'xDAI'
+    
+  chiado:
+    name: 'Gnosis Chiado Testnet'
+    rpc_url: 'https://rpc.chiadochain.net'
+    explorer_url: 'https://gnosis-chiado.blockscout.com'
+    chain_id: 10200
+    symbol: 'xDAI'
+    
+  ethereum:
+    name: 'Ethereum Mainnet'
+    rpc_url: 'https://mainnet.infura.io/v3/YOUR_KEY'
+    explorer_url: 'https://etherscan.io'
+    chain_id: 1
+    symbol: 'ETH'

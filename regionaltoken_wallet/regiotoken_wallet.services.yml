@@ -1,0 +1,16 @@
+services:
+  regiotoken_wallet.blockchain_service:
+    class: Drupal\regiotoken_wallet\Service\BlockchainService
+    arguments: ['@config.factory', '@logger.factory']
+    
+  regiotoken_wallet.transaction_service:
+    class: Drupal\regiotoken_wallet\Service\TransactionService
+    arguments: ['@database', '@regiotoken_wallet.blockchain_service', '@logger.factory']
+    
+  regiotoken_wallet.wallet_service:
+    class: Drupal\regiotoken_wallet\Service\WalletService
+    arguments: ['@database', '@regiotoken_wallet.blockchain_service', '@current_user']
+    
+  regiotoken_wallet.flutter_integration_service:
+    class: Drupal\regiotoken_wallet\Service\FlutterIntegrationService
+    arguments: ['@database', '@regiotoken_wallet.blockchain_service', '@logger.factory']

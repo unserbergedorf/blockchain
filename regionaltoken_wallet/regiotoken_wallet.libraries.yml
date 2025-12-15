@@ -1,0 +1,13 @@
+wallet:
+  version: 1.0
+  js:
+    js/wallet.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+  css:
+    component:
+      css/wallet.css: {}
+      css/admin.css: {}
+      

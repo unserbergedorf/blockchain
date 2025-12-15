@@ -1,0 +1,146 @@
+regiotoken_wallet.test:
+  path: '/rtw-test'
+  defaults:
+    _title: 'RegioToken Test'
+    _controller: '\Drupal\regiotoken_wallet\Controller\TestController::test'
+  requirements:
+    _access: 'TRUE'
+
+regiotoken_wallet.wallet:
+  path: '/rtw-wallet'
+  defaults:
+    _title: 'RegioToken Wallet'
+    _controller: '\Drupal\regiotoken_wallet\Controller\WalletController::walletPage'
+  requirements:
+    _permission: 'access content'
+    _user_is_logged_in: 'TRUE'
+
+regiotoken_wallet.transfer:
+  path: '/rtw-transfer'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\WalletController::transfer'
+  requirements:
+    _permission: 'access content'
+    _user_is_logged_in: 'TRUE'
+
+regiotoken_wallet.settings:
+  path: '/admin/config/regiotoken/blockchain'
+  defaults:
+    _form: '\Drupal\regiotoken_wallet\Form\BlockchainSettingsForm'
+    _title: 'RegioToken Blockchain Settings'
+  requirements:
+    _permission: 'administer regiotoken wallet'
+
+regiotoken_wallet.api.balance:
+  path: '/api/regiotoken/balance/{address}'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\ApiController::getBalance'
+  requirements:
+    _permission: 'access content'
+  options:
+    parameters:
+      address:
+        type: string
+
+regiotoken_wallet.api.gas:
+  path: '/api/regiotoken/gas-price'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\ApiController::getGasPrice'
+  requirements:
+    _permission: 'access content'
+
+regiotoken_wallet.api.transaction:
+  path: '/api/regiotoken/transaction/{txHash}'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\ApiController::getTransaction'
+  requirements:
+    _permission: 'access content'
+
+regiotoken_wallet.cron.sync:
+  path: '/cron/regiotoken/sync'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\CronController::syncTransactions'
+  requirements:
+    _access: 'TRUE'
+
+# Flutter App API Endpoints
+regiotoken_wallet.api.flutter.login:
+  path: '/api/flutter/login'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\FlutterApiController::login'
+  requirements:
+    _access: 'TRUE'
+
+regiotoken_wallet.api.flutter.balance:
+  path: '/api/flutter/balance'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\FlutterApiController::getBalance'
+  requirements:
+    _access: 'TRUE'
+
+regiotoken_wallet.api.flutter.send:
+  path: '/api/flutter/send'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\FlutterApiController::sendTokens'
+  requirements:
+    _access: 'TRUE'
+
+regiotoken_wallet.api.flutter.transactions:
+  path: '/api/flutter/transactions'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\FlutterApiController::getTransactions'
+  requirements:
+    _access: 'TRUE'
+
+regiotoken_wallet.api.flutter.qr_generate:
+  path: '/api/flutter/qr/{address}'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\FlutterApiController::generateQR'
+  requirements:
+    _access: 'TRUE'
+
+regiotoken_wallet.admin:
+  path: '/admin/regiotoken'
+  defaults:
+    _title: 'RegioToken Admin'
+    _controller: '\Drupal\regiotoken_wallet\Controller\AdminController::dashboard'
+  requirements:
+    _permission: 'administer site configuration'
+
+regiotoken_wallet.transaction_detail:
+  path: '/admin/regiotoken/transaction/{id}'
+  defaults:
+    _title: 'Transaktion Details'
+    _controller: '\Drupal\regiotoken_wallet\Controller\AdminController::transactionDetail'
+  requirements:
+    _permission: 'administer site configuration'
+    id: \d+
+
+regiotoken_wallet.update_status:
+  path: '/admin/regiotoken/transaction/{id}/update-status'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\AdminController::updateTransactionStatus'
+  requirements:
+    _permission: 'administer site configuration'
+    id: \d+
+
+regiotoken_wallet.adjust_balance:
+  path: '/admin/regiotoken/adjust-balance'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\AdminController::adjustUserBalance'
+  requirements:
+    _permission: 'administer site configuration'
+
+regiotoken_wallet.export:
+  path: '/admin/regiotoken/export'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\AdminController::exportTransactions'
+  requirements:
+    _permission: 'administer site configuration'
+
+regiotoken_wallet.system_info:
+  path: '/admin/regiotoken/system-info'
+  defaults:
+    _controller: '\Drupal\regiotoken_wallet\Controller\AdminController::getSystemInfoApi'
+  requirements:
+    _permission: 'administer site configuration'

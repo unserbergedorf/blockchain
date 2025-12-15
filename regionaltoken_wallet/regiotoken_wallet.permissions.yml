@@ -1,0 +1,8 @@
+access regiotoken wallet:
+  title: 'Access RegioToken Wallet'
+  description: 'Allow users to access their RegioToken wallet.'
+
+administer regiotoken wallet:
+  title: 'Administer RegioToken Wallet'
+  description: 'Administer all RegioToken wallet transactions and settings.'
+  restrict access: true

@@ -1,0 +1,88 @@
+<div class="regiotoken-wallet" style="max-width:600px;margin:0 auto;padding:20px;">
+  <h1>👛 RegioToken Wallet</h1>
+  
+  <!-- Balance Card -->
+  <div style="text-align:center;background:linear-gradient(135deg,#4CAF50 0%,#2E7D32 100%);color:white;border-radius:10px;padding:2rem;margin:2rem 0;box-shadow:0 10px 30px rgba(76,175,80,0.3);">
+    <div style="font-size:1rem;opacity:0.9;">Ihr Guthaben</div>
+    <div class="balance-amount" style="font-size:3rem;font-weight:bold;margin:0.5rem 0;">
+      {{ balance|number_format(2, ',', '.') }} {{ symbol }}
+    </div>
+    <div style="font-family:monospace;font-size:0.9rem;background:rgba(255,255,255,0.2);padding:0.5rem;border-radius:5px;margin-top:1rem;">
+      {{ address }}
+    </div>
+    <div style="margin-top:1rem;font-size:0.85rem;opacity:0.8;">
+      Verfügbar für Transaktionen
+    </div>
+  </div>
+
+  <!-- Send Button -->
+  <div style="margin-bottom:2rem;">
+    <button id="sendTokensBtn" style="width:100%;padding:1.5rem;background:#2196F3;color:white;border:none;border-radius:10px;font-size:1.2rem;cursor:pointer;font-weight:bold;transition:all 0.3s;">
+      ➡️ RegioToken senden
+    </button>
+  </div>
+
+  <!-- Transactions -->
+  {% if transactions is not empty %}
+    <div style="margin-top:2rem;">
+      <h3>📋 Letzte Transaktionen</h3>
+      <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin-top:1rem;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+        {% for tx in transactions %}
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #dee2e6;{% if loop.last %}border-bottom:none;{% endif %}">
+            <div style="flex:1;">
+              <div style="font-weight:500;display:flex;align-items:center;gap:8px;">
+                {% if tx.from == address %}
+                  <span style="color:#f44336;">➡️ Gesendet</span>
+                {% else %}
+                  <span style="color:#4CAF50;">⬅️ Empfangen</span>
+                {% endif %}
+                <span style="font-size:0.75rem;padding:2px 8px;background:#e9ecef;border-radius:10px;color:#495057;">
+                  {{ tx.status }}
+                </span>
+              </div>
+              <div style="font-size:0.85rem;color:#6c757d;margin-top:4px;">
+                {{ tx.timestamp|date("d.m.Y H:i") }}
+                {% if tx.memo %} - {{ tx.memo }}{% endif %}
+              </div>
+              <div style="font-size:0.75rem;color:#adb5bd;margin-top:2px;font-family:monospace;">
+                {{ tx.transactionHash|slice(0, 12) }}...{{ tx.transactionHash|slice(-8) }}
+              </div>
+            </div>
+            <div style="font-weight:bold;color:{% if tx.from == address %}#f44336{% else %}#4CAF50{% endif %};font-size:1.1rem;">
+              {% if tx.from == address %}-{% else %}+{% endif %}{{ tx.amount|number_format(2, ',', '.') }} {{ symbol }}
+            </div>
+          </div>
+        {% endfor %}
+        
+        {% if transactions|length >= 10 %}
+          <div style="text-align:center;margin-top:15px;">
+            <button style="padding:8px 16px;background:#e9ecef;border:none;border-radius:6px;color:#495057;cursor:pointer;">
+              Alle Transaktionen anzeigen
+            </button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div style="margin-top:2rem;text-align:center;padding:3rem;background:#f8f9fa;border-radius:8px;">
+      <div style="font-size:3rem;opacity:0.5;">📄</div>
+      <h3 style="color:#6c757d;">Keine Transaktionen</h3>
+      <p style="color:#adb5bd;">Hier werden Ihre Transaktionen angezeigt.</p>
+    </div>
+  {% endif %}
+  
+  <!-- Info Box -->
+  <div style="margin-top:2rem;padding:15px;background:#e8f4fd;border-radius:8px;border-left:4px solid #2196F3;">
+    <div style="font-size:0.9rem;color:#0c5460;">
+      <strong>ℹ️ Informationen:</strong>
+      <ul style="margin:10px 0 0 20px;padding:0;">
+        <li>Transaktionen werden sofort verarbeitet</li>
+        <li>Alle Transaktionen sind endgültig</li>
+        <li>Maximal 10 Transaktionen pro Stunde</li>
+        <li>Support: support@regiotoken.de</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal wird von JavaScript eingefügt -->

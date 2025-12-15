@@ -1,0 +1,328 @@
+<div class="regiotoken-admin-dashboard" style="max-width:1400px;margin:0 auto;padding:20px;">
+  <!-- Header -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid #e9ecef;">
+    <div>
+      <h1 style="margin:0;color:#2c3e50;">👑 RegioToken Admin Dashboard</h1>
+      <p style="margin:5px 0 0 0;color:#6c757d;font-size:0.9rem;">
+        System-Übersicht & Verwaltung
+        <span style="margin-left:15px;color:#adb5bd;">
+          {{ system_info.server_time }}
+        </span>
+      </p>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <a href="/admin/regiotoken/export" 
+         style="padding:10px 20px;background:#28a745;color:white;border-radius:6px;text-decoration:none;font-weight:bold;display:flex;align-items:center;gap:8px;">
+         📊 Export
+      </a>
+      <a href="/rtw-wallet" 
+         style="padding:10px 20px;background:#6c757d;color:white;border-radius:6px;text-decoration:none;font-weight:bold;display:flex;align-items:center;gap:8px;">
+         👤 User Wallet
+      </a>
+    </div>
+  </div>
+  
+  <!-- Statistiken Karten -->
+  <div style="margin-bottom:40px;">
+    <h2 style="color:#495057;margin-bottom:20px;">📈 System-Statistiken</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:20px;">
+      
+      <!-- Users Card -->
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);border-top:4px solid #007bff;">
+        <div style="display:flex;align-items:center;margin-bottom:15px;">
+          <div style="background:#e7f1ff;padding:12px;border-radius:8px;margin-right:15px;">
+            <span style="font-size:24px;">👥</span>
+          </div>
+          <div>
+            <div style="font-size:0.9rem;color:#6c757d;">Registrierte User</div>
+            <div style="font-size:2.2rem;font-weight:bold;color:#007bff;">{{ stats.total_users }}</div>
+          </div>
+        </div>
+        <div style="font-size:0.85rem;color:#adb5bd;border-top:1px solid #f8f9fa;padding-top:12px;">
+          Mit aktiver Wallet
+        </div>
+      </div>
+      
+      <!-- Transactions Card -->
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);border-top:4px solid #28a745;">
+        <div style="display:flex;align-items:center;margin-bottom:15px;">
+          <div style="background:#e8f5e8;padding:12px;border-radius:8px;margin-right:15px;">
+            <span style="font-size:24px;">💸</span>
+          </div>
+          <div>
+            <div style="font-size:0.9rem;color:#6c757d;">Transaktionen</div>
+            <div style="font-size:2.2rem;font-weight:bold;color:#28a745;">{{ stats.total_transactions|number_format(0, ',', '.') }}</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;border-top:1px solid #f8f9fa;padding-top:12px;">
+          <span style="color:#6c757d;">Heute: <strong style="color:#28a745;">{{ stats.today_transactions }}</strong></span>
+          <span style="color:#6c757d;">Ausstehend: <strong style="color:#fd7e14;">{{ stats.pending_transactions }}</strong></span>
+        </div>
+      </div>
+      
+      <!-- Volume Card -->
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);border-top:4px solid #fd7e14;">
+        <div style="display:flex;align-items:center;margin-bottom:15px;">
+          <div style="background:#fff3e8;padding:12px;border-radius:8px;margin-right:15px;">
+            <span style="font-size:24px;">💰</span>
+          </div>
+          <div>
+            <div style="font-size:0.9rem;color:#6c757d;">Gesamtvolumen</div>
+            <div style="font-size:2.2rem;font-weight:bold;color:#fd7e14;">{{ stats.total_volume|number_format(2, ',', '.') }} REGIO</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;border-top:1px solid #f8f9fa;padding-top:12px;">
+          <span style="color:#6c757d;">Heute: <strong>{{ stats.today_volume|number_format(2, ',', '.') }} REGIO</strong></span>
+          <span style="color:#6c757d;">⌀: <strong>{{ stats.avg_transaction|number_format(2, ',', '.') }} REGIO</strong></span>
+        </div>
+      </div>
+      
+      <!-- Balance Card -->
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);border-top:4px solid #6f42c1;">
+        <div style="display:flex;align-items:center;margin-bottom:15px;">
+          <div style="background:#f0e6ff;padding:12px;border-radius:8px;margin-right:15px;">
+            <span style="font-size:24px;">🏦</span>
+          </div>
+          <div>
+            <div style="font-size:0.9rem;color:#6c757d;">Gesamtguthaben</div>
+            <div style="font-size:2.2rem;font-weight:bold;color:#6f42c1;">{{ stats.total_balance|number_format(2, ',', '.') }} REGIO</div>
+          </div>
+        </div>
+        <div style="font-size:0.85rem;color:#adb5bd;border-top:1px solid #f8f9fa;padding-top:12px;">
+          In allen User-Wallets
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Top User nach Guthaben -->
+  <div style="margin-bottom:40px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h2 style="color:#495057;margin:0;">🏆 Top User nach Guthaben</h2>
+      <div style="font-size:0.9rem;color:#6c757d;">
+        {{ top_users|length }} User
+      </div>
+    </div>
+    
+    <div style="background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#f8f9fa;">
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Rank</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">User</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Wallet Adresse</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Guthaben</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in top_users %}
+          <tr style="border-bottom:1px solid #f8f9fa;">
+            <td style="padding:16px;color:#6c757d;font-weight:bold;">
+              <div style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#e9ecef;border-radius:50%;">
+                {{ loop.index }}
+              </div>
+            </td>
+            <td style="padding:16px;">
+              <div style="font-weight:600;color:#2c3e50;">{{ user.username }}</div>
+              <div style="font-size:0.85rem;color:#6c757d;">ID: {{ user.user_id }}</div>
+              <div style="font-size:0.85rem;color:#adb5bd;">{{ user.email }}</div>
+            </td>
+            <td style="padding:16px;">
+              <div style="font-family:monospace;font-size:0.9rem;color:#495057;">
+                {{ user.address_short }}
+              </div>
+              <button onclick="copyToClipboard('{{ user.wallet_address }}')" 
+                style="margin-top:5px;padding:4px 8px;background:#e9ecef;border:none;border-radius:4px;font-size:0.75rem;color:#6c757d;cursor:pointer;">
+                📋 Kopieren
+              </button>
+            </td>
+            <td style="padding:16px;">
+              <div style="font-size:1.5rem;font-weight:bold;color:#28a745;">
+                {{ user.balance_formatted }} REGIO
+              </div>
+            </td>
+            <td style="padding:16px;">
+              <button onclick="openBalanceModal({{ user.user_id }}, '{{ user.username }}', {{ user.balance }})"
+                style="padding:8px 16px;background:#17a2b8;color:white;border:none;border-radius:6px;font-size:0.85rem;cursor:pointer;margin-right:8px;">
+                ✏️ Anpassen
+              </button>
+              <a href="/admin/regiotoken/user/{{ user.user_id }}"
+                style="padding:8px 16px;background:#6c757d;color:white;border-radius:6px;text-decoration:none;font-size:0.85rem;">
+                📋 Details
+              </a>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" style="padding:40px;text-align:center;color:#6c757d;">
+              <div style="font-size:3rem;opacity:0.3;margin-bottom:10px;">👥</div>
+              <div>Keine User gefunden</div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Letzte Transaktionen -->
+  <div style="margin-bottom:40px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h2 style="color:#495057;margin:0;">📋 Letzte Transaktionen</h2>
+      <a href="/admin/regiotoken/transactions" 
+         style="padding:8px 16px;background:#e9ecef;color:#495057;border-radius:6px;text-decoration:none;font-size:0.9rem;">
+         Alle anzeigen →
+      </a>
+    </div>
+    
+    <div style="background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#f8f9fa;">
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">ID</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">User</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Transaktion</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Betrag</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Status</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Datum</th>
+            <th style="padding:16px;text-align:left;color:#495057;font-weight:600;border-bottom:2px solid #e9ecef;">Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tx in transactions %}
+          <tr style="border-bottom:1px solid #f8f9fa;">
+            <td style="padding:16px;color:#6c757d;font-family:monospace;">
+              #{{ tx.id }}
+            </td>
+            <td style="padding:16px;">
+              <div style="font-weight:600;color:#2c3e50;">{{ tx.username }}</div>
+              <div style="font-size:0.85rem;color:#6c757d;">ID: {{ tx.user_id }}</div>
+            </td>
+            <td style="padding:16px;">
+              <div style="font-family:monospace;font-size:0.85rem;color:#495057;">
+                {{ tx.from_address|slice(0, 8) }}... → {{ tx.to_address|slice(0, 8) }}...
+              </div>
+              <div style="font-size:0.75rem;color:#adb5bd;margin-top:2px;">
+                {{ tx.tx_hash|slice(0, 12) }}...
+              </div>
+              {% if tx.memo %}
+              <div style="font-size:0.85rem;color:#6c757d;margin-top:4px;font-style:italic;">
+                "{{ tx.memo }}"
+              </div>
+              {% endif %}
+            </td>
+            <td style="padding:16px;">
+              <div style="font-size:1.2rem;font-weight:bold;color:{% if tx.from_address matches '/^0xREGIO/' %}#28a745{% else %}#dc3545{% endif %};">
+                {% if tx.from_address matches '/^0xREGIO/' %}+{% else %}-{% endif %}{{ tx.amount_formatted }} {{ tx.token_symbol }}
+              </div>
+            </td>
+            <td style="padding:16px;">
+              <span style="padding:6px 12px;border-radius:20px;font-size:0.85rem;font-weight:600;
+                background:
+                {% if tx.status == 'confirmed' %}#d4edda;color:#155724;
+                {% elseif tx.status == 'pending' %}#fff3cd;color:#856404;
+                {% else %}#f8d7da;color:#721c24;{% endif %}">
+                {{ tx.status|upper }}
+              </span>
+              {% if tx.block_number %}
+              <div style="font-size:0.75rem;color:#6c757d;margin-top:4px;">
+                Block: {{ tx.block_number }}
+              </div>
+              {% endif %}
+            </td>
+            <td style="padding:16px;font-size:0.9rem;">
+              <div style="color:#495057;">{{ tx.created_formatted }}</div>
+              {% if tx.confirmed_formatted != '-' %}
+              <div style="font-size:0.8rem;color:#6c757d;">
+                Bestätigt: {{ tx.confirmed_formatted }}
+              </div>
+              {% endif %}
+            </td>
+            <td style="padding:16px;">
+              <a href="/admin/regiotoken/transaction/{{ tx.id }}" 
+                 style="padding:6px 12px;background:#007bff;color:white;border-radius:4px;text-decoration:none;font-size:0.85rem;margin-right:8px;">
+                 👁️ Details
+              </a>
+              {% if tx.status == 'pending' %}
+              <button onclick="updateTransactionStatus({{ tx.id }}, 'confirmed')"
+                style="padding:6px 12px;background:#28a745;color:white;border:none;border-radius:4px;font-size:0.85rem;cursor:pointer;">
+                ✅ Bestätigen
+              </button>
+              {% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="7" style="padding:40px;text-align:center;color:#6c757d;">
+              <div style="font-size:3rem;opacity:0.3;margin-bottom:10px;">📄</div>
+              <div>Keine Transaktionen gefunden</div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- System Information -->
+  <div style="margin-bottom:40px;">
+    <h2 style="color:#495057;margin-bottom:20px;">⚙️ System-Informationen</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:20px;">
+      
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+        <h3 style="margin-top:0;color:#495057;font-size:1.1rem;margin-bottom:20px;">📦 Module</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f8f9fa;">
+          <span style="color:#6c757d;">RegioToken Wallet</span>
+          <span style="font-weight:600;color:#495057;">{{ system_info.module_version }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f8f9fa;">
+          <span style="color:#6c757d;">Drupal Version</span>
+          <span style="font-weight:600;color:#495057;">{{ system_info.drupal_version }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+          <span style="color:#6c757d;">PHP Version</span>
+          <span style="font-weight:600;color:#495057;">{{ system_info.php_version }}</span>
+        </div>
+      </div>
+      
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+        <h3 style="margin-top:0;color:#495057;font-size:1.1rem;margin-bottom:20px;">💾 Datenbank</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f8f9fa;">
+          <span style="color:#6c757d;">Datenbank Größe</span>
+          <span style="font-weight:600;color:#495057;">{{ system_info.database_size }} MB</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f8f9fa;">
+          <span style="color:#6c757d;">Letzte Transaktion</span>
+          <span style="font-weight:600;color:#495057;">{{ system_info.last_transaction }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+          <span style="color:#6c757d;">System Uptime</span>
+          <span style="font-weight:600;color:#495057;">{{ system_info.uptime }}</span>
+        </div>
+      </div>
+      
+      <div style="background:white;border-radius:10px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+        <h3 style="margin-top:0;color:#495057;font-size:1.1rem;margin-bottom:20px;">🚀 Schnellaktionen</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button onclick="syncAllBalances()"
+            style="padding:12px;background:#17a2b8;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;text-align:left;">
+            🔄 Guthaben synchronisieren
+          </button>
+          <button onclick="clearOldTransactions()"
+            style="padding:12px;background:#6c757d;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;text-align:left;">
+            🗑️ Alte Transaktionen löschen
+          </button>
+          <button onclick="backupDatabase()"
+            style="padding:12px;background:#28a745;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;text-align:left;">
+            💾 Backup erstellen
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Modals werden von JavaScript eingefügt -->
