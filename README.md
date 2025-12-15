@@ -1,11 +1,32 @@
-# Blockchain Daten Repository
+# Regional Token Wallet - Dokumentation
+
+Dieser Ordner enthält Dokumente und Daten zur Regional Token Wallet.
 
 ## Inhalt
-- **regionaltoken_wallet/**: Daten zu Regional Token Wallets
-  - [Beschreibung der enthaltenen Daten]
 
-## Nutzung
-[Anleitung wie die Daten genutzt werden können]
+### Dokumente
+- `RegionalToken Wallet.pdf` - Technische Dokumentation der Wallet
+- `WalletFunktionen.png` - Übersicht der Wallet-Funktionen
+
+### Daten
+- `regionaltoken_wallet.xlsx` - Daten zur Wallet-Verteilung und Statistiken
+
+## Dateibeschreibung
+
+### PDF Dokument
+- **Titel**: RegionalToken Wallet
+- **Inhalt**: Technische Spezifikationen, Sicherheitsfeatures, Anwendungsfälle
+- **Version**: [Bitte ergänzen]
+
+### Excel Datei
+- **Tabellen**: 
+  - Wallet Statistiken
+  - Token-Verteilung
+  - Transaktionsdaten
+- **Letzte Aktualisierung**: [Datum einfügen]
+
+## Datenaktualisierung
+Die Daten werden [monatlich/vierteljährlich] aktualisiert.
 
 ## Lizenz
-[Siehe LICENSE Datei]
+Siehe Haupt-LICENSE Datei im Root-Verzeichnis.
